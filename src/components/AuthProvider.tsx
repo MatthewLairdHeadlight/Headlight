@@ -52,9 +52,24 @@ interface AuthProviderProps {
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null);
 
+  /**
+   * DEMO AUTHENTICATION - NOT FOR PRODUCTION USE
+   * 
+   * In a production environment, this would:
+   * 1. Send credentials to a secure backend API
+   * 2. Validate against a user database with hashed passwords
+   * 3. Use JWT or session-based authentication
+   * 4. Implement rate limiting and brute force protection
+   * 
+   * Password parameter is intentionally unused in demo mode.
+   */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const login = async (email: string, _password?: string): Promise<boolean> => {
-    // Demo authentication - in production, this would validate against a backend
+    // Demo authentication - password validation would happen on the backend
+    if (process.env.NODE_ENV === 'production') {
+      console.warn('Demo authentication should not be used in production!');
+    }
+    
     const demoUser = demoUsers[email.toLowerCase()];
     if (demoUser) {
       setUser(demoUser);

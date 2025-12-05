@@ -34,7 +34,19 @@ export interface CreatePaymentIntentResponse {
   paymentIntentId: string;
 }
 
-// Payment methods - for tokenizing card information
+/**
+ * DEPRECATED - DO NOT USE IN PRODUCTION
+ * 
+ * This interface is provided for type reference only.
+ * In production, card data should NEVER be handled by your application.
+ * 
+ * Instead, use Stripe Elements which:
+ * - Securely collects card data in an iframe
+ * - Tokenizes card information directly with Stripe
+ * - Never exposes raw card data to your JavaScript
+ * 
+ * @deprecated Use Stripe Elements for card collection
+ */
 export interface PaymentMethodData {
   cardNumber: string;
   expiryMonth: number;

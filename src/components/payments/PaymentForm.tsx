@@ -36,11 +36,24 @@ export function PaymentForm({ paymentRequest, onPaymentSuccess, onCancel }: Paym
     setError(null);
 
     try {
-      // In a real implementation, this would:
-      // 1. Create a payment intent on the server
-      // 2. Use Stripe Elements to collect card details
-      // 3. Confirm the payment with Stripe
-      // For demo purposes, we'll simulate a successful payment
+      /**
+       * DEMO PAYMENT FLOW - NOT FOR PRODUCTION USE
+       * 
+       * In a production environment, this would:
+       * 1. Create a payment intent on the server via API call
+       * 2. Use Stripe Elements to securely collect card details
+       * 3. Confirm the payment with Stripe's confirmCardPayment()
+       * 4. Handle 3D Secure authentication if required
+       * 5. Process webhooks for payment status updates
+       * 
+       * For production, replace this with actual Stripe integration:
+       * - Use @stripe/react-stripe-js Elements provider
+       * - Never handle raw card data on the client
+       * - Implement server-side payment intent creation
+       */
+      if (process.env.NODE_ENV === 'production') {
+        throw new Error('Demo payment processing is disabled in production. Please configure Stripe integration.');
+      }
       
       // Simulate API call delay
       await new Promise(resolve => setTimeout(resolve, 2000));
